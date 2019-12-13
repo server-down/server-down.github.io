@@ -7,7 +7,9 @@
     <meta name="keywords" content="Monitoring Spring Boot application with Prometheus and Grafana, Server Down">
     <meta name="description" content="
 Spring boot applicationDependenciesIn pom.xml file, add these 2 dependencies:
-1234567891011&amp;lt;dependencies&amp;gt;    &amp;lt;">
+&amp;lt;dependencies&gt;
+    &amp;lt;dependency&gt;
+   ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -28,7 +30,7 @@ Spring boot applicationDependenciesIn pom.xml file, add these 2 dependencies:
     
     <script src="/libs/jquery/jquery.min.js"></script>
     
-<meta name="generator" content="Hexo 4.1.1"></head>
+<meta name="generator" content="Hexo 4.1.1"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -459,28 +461,110 @@ Spring boot applicationDependenciesIn pom.xml file, add these 2 dependencies:
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><img src="images/spring-prometheus-grafana.png" alt="spring-prometheus-grafana"></p>
+                <p><img src="https://raw.githubusercontent.com/halab4dev/spring-prometheus-grafana/master/images/spring-prometheus-grafana.png" alt="spring-prometheus-grafana"></p>
 <h2 id="Spring-boot-application"><a href="#Spring-boot-application" class="headerlink" title="Spring boot application"></a>Spring boot application</h2><h5 id="Dependencies"><a href="#Dependencies" class="headerlink" title="Dependencies"></a>Dependencies</h5><p>In <code>pom.xml</code> file, add these 2 dependencies:</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-actuator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.micrometer<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>micrometer-registry-prometheus<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.3.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-actuator<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>io.micrometer<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>micrometer-registry-prometheus<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.3.0<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span></code></pre>
 <ul>
 <li>Spring boot actuator automatically create endpoints that can provide metrics of application such as heap memory used, cpu load, GC information …</li>
 <li>Micrometer registry prometheus will format these information in prometheus way</li>
 </ul>
 <h5 id="Enable-endpoints"><a href="#Enable-endpoints" class="headerlink" title="Enable endpoints"></a>Enable endpoints</h5><p>By default, Spring Boot Actuator only expose 2 endpoints: <code>/actuator/health</code>  and <code>/actuator/health</code>, so we need to enable other endpoint in configuration file:</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">management:</span></span><br><span class="line">  <span class="attr">endpoints:</span></span><br><span class="line">    <span class="attr">web:</span></span><br><span class="line">      <span class="attr">exposure:</span></span><br><span class="line">        <span class="attr">include:</span> <span class="string">prometheus,health,info</span></span><br></pre></td></tr></table></figure>
-
+<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">management</span><span class="token punctuation">:</span>
+  <span class="token key atrule">endpoints</span><span class="token punctuation">:</span>
+    <span class="token key atrule">web</span><span class="token punctuation">:</span>
+      <span class="token key atrule">exposure</span><span class="token punctuation">:</span>
+        <span class="token key atrule">include</span><span class="token punctuation">:</span> prometheus<span class="token punctuation">,</span>health<span class="token punctuation">,</span>info</code></pre>
 <p>Now we can get metrics:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl 'http://localhost:8080/actuator/health'</span><br><span class="line"></span><br><span class="line">&#123;"status":"UP"&#125;</span><br></pre></td></tr></table></figure>
+<pre class=" language-shell"><code class="language-shell">curl 'http://localhost:8080/actuator/health'
 
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">curl 'http://localhost:8080/actuator/prometheus'</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"><span class="meta">#</span><span class="bash"> HELP process_uptime_seconds The uptime of the Java virtual machine</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> TYPE process_uptime_seconds gauge</span></span><br><span class="line">process_uptime_seconds 278.817</span><br><span class="line"><span class="meta">#</span><span class="bash"> HELP jvm_memory_max_bytes The maximum amount of memory <span class="keyword">in</span> bytes that can be used <span class="keyword">for</span> memory management</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> TYPE jvm_memory_max_bytes gauge</span></span><br><span class="line">jvm_memory_max_bytes&#123;area="heap",id="PS Survivor Space",&#125; 1.048576E7</span><br><span class="line">jvm_memory_max_bytes&#123;area="heap",id="PS Old Gen",&#125; 2.78396928E9</span><br><span class="line">jvm_memory_max_bytes&#123;area="heap",id="PS Eden Space",&#125; 1.370488832E9</span><br><span class="line">jvm_memory_max_bytes&#123;area="nonheap",id="Metaspace",&#125; -1.0</span><br><span class="line">jvm_memory_max_bytes&#123;area="nonheap",id="Code Cache",&#125; 2.5165824E8</span><br><span class="line">jvm_memory_max_bytes&#123;area="nonheap",id="Compressed Class Space",&#125; 1.073741824E9</span><br><span class="line"><span class="meta">#</span><span class="bash"> HELP jvm_gc_pause_seconds Time spent <span class="keyword">in</span> GC pause</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> TYPE jvm_gc_pause_seconds summary</span></span><br><span class="line">jvm_gc_pause_seconds_count&#123;action="end of major GC",cause="Metadata GC Threshold",&#125; 1.0</span><br><span class="line">jvm_gc_pause_seconds_sum&#123;action="end of major GC",cause="Metadata GC Threshold",&#125; 0.093</span><br><span class="line">jvm_gc_pause_seconds_count&#123;action="end of minor GC",cause="Metadata GC Threshold",&#125; 1.0</span><br><span class="line">jvm_gc_pause_seconds_sum&#123;action="end of minor GC",cause="Metadata GC Threshold",&#125; 0.014</span><br><span class="line"><span class="meta">#</span><span class="bash"> HELP system_load_average_1m The sum of the number of runnable entities queued to available processors and the number of runnable entities running on the available processors averaged over a period of time</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> TYPE system_load_average_1m gauge</span></span><br><span class="line">system_load_average_1m 1.34</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+{"status":"UP"}</code></pre>
+<pre class=" language-shell"><code class="language-shell">curl 'http://localhost:8080/actuator/prometheus'
 
+...
+# HELP process_uptime_seconds The uptime of the Java virtual machine
+# TYPE process_uptime_seconds gauge
+process_uptime_seconds 278.817
+# HELP jvm_memory_max_bytes The maximum amount of memory in bytes that can be used for memory management
+# TYPE jvm_memory_max_bytes gauge
+jvm_memory_max_bytes{area="heap",id="PS Survivor Space",} 1.048576E7
+jvm_memory_max_bytes{area="heap",id="PS Old Gen",} 2.78396928E9
+jvm_memory_max_bytes{area="heap",id="PS Eden Space",} 1.370488832E9
+jvm_memory_max_bytes{area="nonheap",id="Metaspace",} -1.0
+jvm_memory_max_bytes{area="nonheap",id="Code Cache",} 2.5165824E8
+jvm_memory_max_bytes{area="nonheap",id="Compressed Class Space",} 1.073741824E9
+# HELP jvm_gc_pause_seconds Time spent in GC pause
+# TYPE jvm_gc_pause_seconds summary
+jvm_gc_pause_seconds_count{action="end of major GC",cause="Metadata GC Threshold",} 1.0
+jvm_gc_pause_seconds_sum{action="end of major GC",cause="Metadata GC Threshold",} 0.093
+jvm_gc_pause_seconds_count{action="end of minor GC",cause="Metadata GC Threshold",} 1.0
+jvm_gc_pause_seconds_sum{action="end of minor GC",cause="Metadata GC Threshold",} 0.014
+# HELP system_load_average_1m The sum of the number of runnable entities queued to available processors and the number of runnable entities running on the available processors averaged over a period of time
+# TYPE system_load_average_1m gauge
+system_load_average_1m 1.34
+...
+</code></pre>
 <h2 id="Prometheus"><a href="#Prometheus" class="headerlink" title="Prometheus"></a>Prometheus</h2><h5 id="Job-configuration"><a href="#Job-configuration" class="headerlink" title="Job configuration"></a>Job configuration</h5><p>In configuration file of Prometheus, define a job to get metric from Spring boot application:</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">scrape_configs:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">job_name:</span> <span class="string">'spring-boot-metrics'</span></span><br><span class="line">    <span class="attr">metrics_path:</span> <span class="string">'/actuator/prometheus'</span></span><br><span class="line">    <span class="attr">scrape_interval:</span> <span class="string">15s</span></span><br><span class="line">    <span class="attr">static_configs:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">targets:</span> <span class="string">['[spring-application-host]:8080']</span></span><br></pre></td></tr></table></figure>
+<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">scrape_configs</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">job_name</span><span class="token punctuation">:</span> <span class="token string">'spring-boot-metrics'</span>
+    <span class="token key atrule">metrics_path</span><span class="token punctuation">:</span> <span class="token string">'/actuator/prometheus'</span>
+    <span class="token key atrule">scrape_interval</span><span class="token punctuation">:</span> 15s
+    <span class="token key atrule">static_configs</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">targets</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'[spring-application-host]:8080'</span><span class="token punctuation">]</span></code></pre>
 <p>This job will call to <code>&#39;/actuator/prometheus&#39;</code> endpoint to get metrics each 15 seconds</p>
 <h2 id="Run-all-with-docker"><a href="#Run-all-with-docker" class="headerlink" title="Run all with docker"></a>Run all with docker</h2><h5 id="Create-image-for-spring-boot-application"><a href="#Create-image-for-spring-boot-application" class="headerlink" title="Create image for spring boot application"></a>Create image for spring boot application</h5><p>Dockerfile</p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> openjdk:<span class="number">8</span></span><br><span class="line"><span class="keyword">VOLUME</span><span class="bash"> /tmp</span></span><br><span class="line"><span class="keyword">ADD</span><span class="bash"> target/spring-prometheus-grafana-0.0.1-SNAPSHOT.jar spring-prometheus-grafana-0.0.1-SNAPSHOT.jar</span></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">8080</span></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="bash"> [<span class="string">"java"</span>,<span class="string">"-jar"</span>,<span class="string">"spring-prometheus-grafana-0.0.1-SNAPSHOT.jar"</span>]</span></span><br></pre></td></tr></table></figure>
+<pre class=" language-dockerfile"><code class="language-dockerfile">FROM openjdk:8
+VOLUME /tmp
+ADD target/spring-prometheus-grafana-0.0.1-SNAPSHOT.jar spring-prometheus-grafana-0.0.1-SNAPSHOT.jar
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","spring-prometheus-grafana-0.0.1-SNAPSHOT.jar"]</code></pre>
 <h5 id="Create-docker-compose-file"><a href="#Create-docker-compose-file" class="headerlink" title="Create docker-compose file"></a>Create docker-compose file</h5><p>Create docker compose file which include: spring application, Prometheus, Grafana<br><code>docker-compose</code> file:</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Version of docker compose. See https://docs.docker.com/compose/compose-file/compose-versioning/#versioning</span></span><br><span class="line"><span class="attr">version:</span> <span class="string">"3"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Services</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">spring-application</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">spring-application</span></span><br><span class="line">    <span class="attr">build:</span></span><br><span class="line">      <span class="attr">context:</span> <span class="string">./</span></span><br><span class="line">      <span class="attr">dockerfile:</span> <span class="string">Dockerfile</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"8080:8080"</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">monitoring-network</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">prometheus:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">prom/prometheus</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">prometheus</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./prometheus.yml:/etc/prometheus/prometheus.yml</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">"9090:9090"</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">monitoring-network</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">grafana:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">grafana/grafana</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">grafana</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"3000:3000"</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">monitoring-network</span></span><br><span class="line"></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line">  <span class="attr">monitoring-network:</span></span><br></pre></td></tr></table></figure>
+<pre class=" language-yaml"><code class="language-yaml"><span class="token comment" spellcheck="true"># Version of docker compose. See https://docs.docker.com/compose/compose-file/compose-versioning/#versioning</span>
+<span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token string">"3"</span>
+
+<span class="token comment" spellcheck="true"># Services</span>
+<span class="token key atrule">services</span><span class="token punctuation">:</span>
+
+  <span class="token key atrule">application</span><span class="token punctuation">:</span>
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> spring<span class="token punctuation">-</span>application
+    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> spring<span class="token punctuation">-</span>application
+    <span class="token key atrule">build</span><span class="token punctuation">:</span>
+      <span class="token key atrule">context</span><span class="token punctuation">:</span> ./
+      <span class="token key atrule">dockerfile</span><span class="token punctuation">:</span> Dockerfile
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token string">"8080:8080"</span>
+    <span class="token key atrule">networks</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> monitoring<span class="token punctuation">-</span>network
+
+  <span class="token key atrule">prometheus</span><span class="token punctuation">:</span>
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> prom/prometheus
+    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> prometheus
+    <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> ./prometheus.yml<span class="token punctuation">:</span>/etc/prometheus/prometheus.yml
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+        <span class="token punctuation">-</span> <span class="token string">"9090:9090"</span>
+    <span class="token key atrule">networks</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> monitoring<span class="token punctuation">-</span>network
+
+  <span class="token key atrule">grafana</span><span class="token punctuation">:</span>
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> grafana/grafana
+    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> grafana
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token string">"3000:3000"</span>
+    <span class="token key atrule">networks</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> monitoring<span class="token punctuation">-</span>network
+
+<span class="token key atrule">networks</span><span class="token punctuation">:</span>
+  monitoring<span class="token punctuation">-</span>network<span class="token punctuation">:</span></code></pre>
 <h5 id="Build-and-run"><a href="#Build-and-run" class="headerlink" title="Build and run"></a>Build and run</h5><ul>
 <li>Build: <code>mvn clean install</code></li>
 <li>Build image: <code>sudo docker build . -t spring-application</code></li>
@@ -511,7 +595,7 @@ Spring boot applicationDependenciesIn pom.xml file, add these 2 dependencies:
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://server-down.github.io/2019/12/14/hello-world/">https://server-down.github.io/2019/12/14/hello-world/</a>
+                    <a href="https://server-down.github.io/2019/12/14/monitoring-spring-boot-application-with-prometheus-and-grafana/">https://server-down.github.io/2019/12/14/monitoring-spring-boot-application-with-prometheus-and-grafana/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -733,7 +817,7 @@ Spring boot applicationDependenciesIn pom.xml file, add these 2 dependencies:
                 <i class="far fa-dot-circle"></i>&nbsp;Current
             </div>
             <div class="card">
-                <a href="/2019/12/14/hello-world/">
+                <a href="/2019/12/14/monitoring-spring-boot-application-with-prometheus-and-grafana/">
                     <div class="card-image">
                         
                         
@@ -747,7 +831,9 @@ Spring boot applicationDependenciesIn pom.xml file, add these 2 dependencies:
                         
                             
 Spring boot applicationDependenciesIn pom.xml file, add these 2 dependencies:
-1234567891011&lt;dependencies&gt;    &lt;
+&lt;dependencies>
+    &lt;dependency>
+   
                         
                     </div>
                     <div class="publish-info">
@@ -797,7 +883,7 @@ Spring boot applicationDependenciesIn pom.xml file, add these 2 dependencies:
                 Current&nbsp;<i class="far fa-dot-circle"></i>
             </div>
             <div class="card">
-                <a href="/2019/12/14/hello-world/">
+                <a href="/2019/12/14/monitoring-spring-boot-application-with-prometheus-and-grafana/">
                     <div class="card-image">
                         
                         
@@ -811,7 +897,9 @@ Spring boot applicationDependenciesIn pom.xml file, add these 2 dependencies:
                         
                             
 Spring boot applicationDependenciesIn pom.xml file, add these 2 dependencies:
-1234567891011&lt;dependencies&gt;    &lt;
+&lt;dependencies>
+    &lt;dependency>
+   
                         
                     </div>
                     <div class="publish-info">
