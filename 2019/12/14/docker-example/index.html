@@ -4,12 +4,11 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Monitoring Spring Boot application with Prometheus and Grafana, Server Down">
-    <meta name="description" content="
-Spring boot applicationDependenciesIn pom.xml file, add these 2 dependencies:
-&amp;lt;dependencies&gt;
-    &amp;lt;dependency&gt;
-   ">
+    <meta name="keywords" content="Docker example, Server Down">
+    <meta name="description" content="This is a simple example of application running with docker, which include 2 containers:
+
+Mongo db
+A java application th">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +16,7 @@ Spring boot applicationDependenciesIn pom.xml file, add these 2 dependencies:
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Monitoring Spring Boot application with Prometheus and Grafana | Server Down</title>
+    <title>Docker example | Server Down</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -285,12 +284,12 @@ Spring boot applicationDependenciesIn pom.xml file, add these 2 dependencies:
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Monitoring Spring Boot application with Prometheus and Grafana</h1>
+                    <h1 class="description center-align post-title">Docker example</h1>
                 </div>
             </div>
         </div>
@@ -407,35 +406,18 @@ Spring boot applicationDependenciesIn pom.xml file, add these 2 dependencies:
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/monitoring/">
-                                <span class="chip bg-color">monitoring</span>
+                            <a href="/tags/docker/">
+                                <span class="chip bg-color">docker</span>
                             </a>
                         
-                            <a href="/tags/spring-boot/">
-                                <span class="chip bg-color">spring boot</span>
-                            </a>
-                        
-                            <a href="/tags/prometheus/">
-                                <span class="chip bg-color">prometheus</span>
-                            </a>
-                        
-                            <a href="/tags/grafana/">
-                                <span class="chip bg-color">grafana</span>
+                            <a href="/tags/docker-compose/">
+                                <span class="chip bg-color">docker-compose</span>
                             </a>
                         
                     </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/Monitoring/" class="post-category">
-                                Monitoring
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -461,115 +443,132 @@ Spring boot applicationDependenciesIn pom.xml file, add these 2 dependencies:
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><img src="https://raw.githubusercontent.com/halab4dev/spring-prometheus-grafana/master/images/spring-prometheus-grafana.png" alt="spring-prometheus-grafana"></p>
-<h2 id="Spring-boot-application"><a href="#Spring-boot-application" class="headerlink" title="Spring boot application"></a>Spring boot application</h2><h5 id="Dependencies"><a href="#Dependencies" class="headerlink" title="Dependencies"></a>Dependencies</h5><p>In <code>pom.xml</code> file, add these 2 dependencies:</p>
-<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-actuator<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>io.micrometer<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>micrometer-registry-prometheus<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.3.0<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span></code></pre>
+                <p>This is a simple example of application running with docker, which include 2 containers:</p>
 <ul>
-<li>Spring boot actuator automatically create endpoints that can provide metrics of application such as heap memory used, cpu load, GC information …</li>
-<li>Micrometer registry prometheus will format these information in prometheus way</li>
+<li>Mongo db</li>
+<li>A java application that insert and read data from mongo</li>
 </ul>
-<h5 id="Enable-endpoints"><a href="#Enable-endpoints" class="headerlink" title="Enable endpoints"></a>Enable endpoints</h5><p>By default, Spring Boot Actuator only expose 2 endpoints: <code>/actuator/health</code>  and <code>/actuator/health</code>, so we need to enable other endpoint in configuration file:</p>
-<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">management</span><span class="token punctuation">:</span>
-  <span class="token key atrule">endpoints</span><span class="token punctuation">:</span>
-    <span class="token key atrule">web</span><span class="token punctuation">:</span>
-      <span class="token key atrule">exposure</span><span class="token punctuation">:</span>
-        <span class="token key atrule">include</span><span class="token punctuation">:</span> prometheus<span class="token punctuation">,</span>health<span class="token punctuation">,</span>info</code></pre>
-<p>Now we can get metrics:</p>
-<pre class=" language-shell"><code class="language-shell">curl 'http://localhost:8080/actuator/health'
+<h2 id="Requirement"><a href="#Requirement" class="headerlink" title="Requirement"></a>Requirement</h2><ul>
+<li><a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener">JDK 8</a></li>
+<li><a href="https://maven.apache.org/install.html" target="_blank" rel="noopener">Maven</a></li>
+<li><a href="https://docs.docker.com/install/linux/docker-ce/binaries/" target="_blank" rel="noopener">Docker</a></li>
+<li><a href="https://docs.docker.com/compose/install/" target="_blank" rel="noopener">Docker-compose</a></li>
+</ul>
+<h2 id="Instruction"><a href="#Instruction" class="headerlink" title="Instruction"></a>Instruction</h2><ul>
+<li>Clone source code</li>
+<li>Build jar file with maven</li>
+<li>Copy jar file to <code>/opt/docker/application</code></li>
+<li>Start services <code>sudo docker-compose -f docker-compose-example.yml up</code></li>
+<li>The result should be like this<pre><code>application-docker | ===== Application information =====
+application-docker | Name: Docker example
+application-docker | Description: Docker compose example, include mongodb and a java application
+application-docker | Created date: Thu May 17 00:00:00 UTC 2018
+application-docker | Last run time: Thu May 17 09:57:26 UTC 2018</code></pre></li>
+</ul>
+<h2 id="Explanation"><a href="#Explanation" class="headerlink" title="Explanation"></a>Explanation</h2><h3 id="Docker-compose-file"><a href="#Docker-compose-file" class="headerlink" title="Docker compose file"></a>Docker compose file</h3><p>This is the content of docker compose file</p>
+<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token string">"3"</span>
 
-{"status":"UP"}</code></pre>
-<pre class=" language-shell"><code class="language-shell">curl 'http://localhost:8080/actuator/prometheus'
-
-...
-# HELP process_uptime_seconds The uptime of the Java virtual machine
-# TYPE process_uptime_seconds gauge
-process_uptime_seconds 278.817
-# HELP jvm_memory_max_bytes The maximum amount of memory in bytes that can be used for memory management
-# TYPE jvm_memory_max_bytes gauge
-jvm_memory_max_bytes{area="heap",id="PS Survivor Space",} 1.048576E7
-jvm_memory_max_bytes{area="heap",id="PS Old Gen",} 2.78396928E9
-jvm_memory_max_bytes{area="heap",id="PS Eden Space",} 1.370488832E9
-jvm_memory_max_bytes{area="nonheap",id="Metaspace",} -1.0
-jvm_memory_max_bytes{area="nonheap",id="Code Cache",} 2.5165824E8
-jvm_memory_max_bytes{area="nonheap",id="Compressed Class Space",} 1.073741824E9
-# HELP jvm_gc_pause_seconds Time spent in GC pause
-# TYPE jvm_gc_pause_seconds summary
-jvm_gc_pause_seconds_count{action="end of major GC",cause="Metadata GC Threshold",} 1.0
-jvm_gc_pause_seconds_sum{action="end of major GC",cause="Metadata GC Threshold",} 0.093
-jvm_gc_pause_seconds_count{action="end of minor GC",cause="Metadata GC Threshold",} 1.0
-jvm_gc_pause_seconds_sum{action="end of minor GC",cause="Metadata GC Threshold",} 0.014
-# HELP system_load_average_1m The sum of the number of runnable entities queued to available processors and the number of runnable entities running on the available processors averaged over a period of time
-# TYPE system_load_average_1m gauge
-system_load_average_1m 1.34
-...
-</code></pre>
-<h2 id="Prometheus"><a href="#Prometheus" class="headerlink" title="Prometheus"></a>Prometheus</h2><h5 id="Job-configuration"><a href="#Job-configuration" class="headerlink" title="Job configuration"></a>Job configuration</h5><p>In configuration file of Prometheus, define a job to get metric from Spring boot application:</p>
-<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">scrape_configs</span><span class="token punctuation">:</span>
-  <span class="token punctuation">-</span> <span class="token key atrule">job_name</span><span class="token punctuation">:</span> <span class="token string">'spring-boot-metrics'</span>
-    <span class="token key atrule">metrics_path</span><span class="token punctuation">:</span> <span class="token string">'/actuator/prometheus'</span>
-    <span class="token key atrule">scrape_interval</span><span class="token punctuation">:</span> 15s
-    <span class="token key atrule">static_configs</span><span class="token punctuation">:</span>
-      <span class="token punctuation">-</span> <span class="token key atrule">targets</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'[spring-application-host]:8080'</span><span class="token punctuation">]</span></code></pre>
-<p>This job will call to <code>&#39;/actuator/prometheus&#39;</code> endpoint to get metrics each 15 seconds</p>
-<h2 id="Run-all-with-docker"><a href="#Run-all-with-docker" class="headerlink" title="Run all with docker"></a>Run all with docker</h2><h5 id="Create-image-for-spring-boot-application"><a href="#Create-image-for-spring-boot-application" class="headerlink" title="Create image for spring boot application"></a>Create image for spring boot application</h5><p>Dockerfile</p>
-<pre class=" language-dockerfile"><code class="language-dockerfile">FROM openjdk:8
-VOLUME /tmp
-ADD target/spring-prometheus-grafana-0.0.1-SNAPSHOT.jar spring-prometheus-grafana-0.0.1-SNAPSHOT.jar
-EXPOSE 8080
-ENTRYPOINT ["java","-jar","spring-prometheus-grafana-0.0.1-SNAPSHOT.jar"]</code></pre>
-<h5 id="Create-docker-compose-file"><a href="#Create-docker-compose-file" class="headerlink" title="Create docker-compose file"></a>Create docker-compose file</h5><p>Create docker compose file which include: spring application, Prometheus, Grafana<br><code>docker-compose</code> file:</p>
-<pre class=" language-yaml"><code class="language-yaml"><span class="token comment" spellcheck="true"># Version of docker compose. See https://docs.docker.com/compose/compose-file/compose-versioning/#versioning</span>
-<span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token string">"3"</span>
-
-<span class="token comment" spellcheck="true"># Services</span>
+<span class="token comment" spellcheck="true"># Containers</span>
 <span class="token key atrule">services</span><span class="token punctuation">:</span>
 
-  <span class="token key atrule">application</span><span class="token punctuation">:</span>
-    <span class="token key atrule">image</span><span class="token punctuation">:</span> spring<span class="token punctuation">-</span>application
-    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> spring<span class="token punctuation">-</span>application
-    <span class="token key atrule">build</span><span class="token punctuation">:</span>
-      <span class="token key atrule">context</span><span class="token punctuation">:</span> ./
-      <span class="token key atrule">dockerfile</span><span class="token punctuation">:</span> Dockerfile
+  <span class="token key atrule">mongodb</span><span class="token punctuation">:</span>
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> mongo
+    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> mongo<span class="token punctuation">-</span>docker
     <span class="token key atrule">ports</span><span class="token punctuation">:</span>
-      <span class="token punctuation">-</span> <span class="token string">"8080:8080"</span>
-    <span class="token key atrule">networks</span><span class="token punctuation">:</span>
-      <span class="token punctuation">-</span> monitoring<span class="token punctuation">-</span>network
-
-  <span class="token key atrule">prometheus</span><span class="token punctuation">:</span>
-    <span class="token key atrule">image</span><span class="token punctuation">:</span> prom/prometheus
-    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> prometheus
+      <span class="token punctuation">-</span> <span class="token string">"27017:27017"</span>
+    <span class="token key atrule">environment</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> MONGO_INITDB_ROOT_USERNAME=halab
+      <span class="token punctuation">-</span> MONGO_INITDB_ROOT_PASSWORD=superman
     <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
-      <span class="token punctuation">-</span> ./prometheus.yml<span class="token punctuation">:</span>/etc/prometheus/prometheus.yml
-    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
-        <span class="token punctuation">-</span> <span class="token string">"9090:9090"</span>
+      <span class="token punctuation">-</span> <span class="token string">"/opt/docker/mongo:/data/db"</span>
     <span class="token key atrule">networks</span><span class="token punctuation">:</span>
-      <span class="token punctuation">-</span> monitoring<span class="token punctuation">-</span>network
+      <span class="token punctuation">-</span> docker<span class="token punctuation">-</span>example
 
-  <span class="token key atrule">grafana</span><span class="token punctuation">:</span>
-    <span class="token key atrule">image</span><span class="token punctuation">:</span> grafana/grafana
-    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> grafana
-    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
-      <span class="token punctuation">-</span> <span class="token string">"3000:3000"</span>
+  <span class="token key atrule">application</span><span class="token punctuation">:</span>
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> openjdk<span class="token punctuation">:</span><span class="token number">8</span>
+    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> application<span class="token punctuation">-</span>docker
+    <span class="token key atrule">depends_on</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> mongodb
+    <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> /opt/docker/application<span class="token punctuation">:</span>/opt/application
+    <span class="token key atrule">command</span><span class="token punctuation">:</span> java <span class="token punctuation">-</span>jar /opt/application/docker<span class="token punctuation">-</span>example<span class="token punctuation">-</span>1.0<span class="token punctuation">-</span>SNAPSHOT.jar
     <span class="token key atrule">networks</span><span class="token punctuation">:</span>
-      <span class="token punctuation">-</span> monitoring<span class="token punctuation">-</span>network
+      <span class="token punctuation">-</span> docker<span class="token punctuation">-</span>example
 
-<span class="token key atrule">networks</span><span class="token punctuation">:</span>
-  monitoring<span class="token punctuation">-</span>network<span class="token punctuation">:</span></code></pre>
-<h5 id="Build-and-run"><a href="#Build-and-run" class="headerlink" title="Build and run"></a>Build and run</h5><ul>
-<li>Build: <code>mvn clean install</code></li>
-<li>Build image: <code>sudo docker build . -t spring-application</code></li>
-<li>Run: <code>sudo docker-compose up</code></li>
+<span class="token key atrule">networks</span><span class="token punctuation">:</span> 
+  docker<span class="token punctuation">-</span>example<span class="token punctuation">:</span></code></pre>
+<h4 id="The-docker-compose-version"><a href="#The-docker-compose-version" class="headerlink" title="The docker compose version"></a>The docker compose version</h4><pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">version</span><span class="token punctuation">:</span> "3</code></pre>
+<p>The first line is <a href="https://docs.docker.com/compose/compose-file/compose-versioning/" target="_blank" rel="noopener">the version of docker compose file</a></p>
+<h4 id="Services-and-network"><a href="#Services-and-network" class="headerlink" title="Services and network"></a>Services and network</h4><pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">services</span><span class="token punctuation">:</span>
+
+  <span class="token key atrule">mongodb</span><span class="token punctuation">:</span>
+    <span class="token punctuation">...</span>
+    <span class="token key atrule">networks</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> docker<span class="token punctuation">-</span>example
+
+  <span class="token key atrule">application</span><span class="token punctuation">:</span>
+    <span class="token punctuation">...</span>
+    <span class="token key atrule">networks</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> docker<span class="token punctuation">-</span>example
+
+<span class="token key atrule">networks</span><span class="token punctuation">:</span> 
+  docker<span class="token punctuation">-</span>example<span class="token punctuation">:</span></code></pre>
+<p>Our system has 2 service: a mongodb and a java application, they must be in the same network to connect to each other.<br>Name the services and network as you like.</p>
+<h5 id="Mongodb-service"><a href="#Mongodb-service" class="headerlink" title="Mongodb service"></a>Mongodb service</h5><pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">services</span><span class="token punctuation">:</span>
+
+  <span class="token key atrule">mongodb</span><span class="token punctuation">:</span>
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> mongo
+    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> mongo<span class="token punctuation">-</span>docker
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token string">"27017:27017"</span>
+    <span class="token key atrule">environment</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> MONGO_INITDB_ROOT_USERNAME=halab
+      <span class="token punctuation">-</span> MONGO_INITDB_ROOT_PASSWORD=superman
+    <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token string">"/opt/docker/mongo:/data/db"</span>
+    <span class="token key atrule">networks</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> docker<span class="token punctuation">-</span>example</code></pre>
+<ul>
+<li>Field <code>image</code>: use <a href="https://hub.docker.com/_/mongo/" target="_blank" rel="noopener">mongo image</a> on docker hub</li>
+<li>Field <code>container_name</code>: set the container name</li>
+<li>Field <code>ports</code>: Open port to connect to mongo from out side of container</li>
+<li>Field <code>environment</code>: set initial <code>root</code> account with username <code>halab</code> and password <code>superman</code></li>
+<li>Field <code>volumes</code>: synchronize folder <code>data/db</code> in the container with folder <code>/opt/docker/mongo</code> in the computer</li>
 </ul>
+<h5 id="Application-service"><a href="#Application-service" class="headerlink" title="Application service"></a>Application service</h5><pre class=" language-yaml"><code class="language-yaml">  <span class="token key atrule">application</span><span class="token punctuation">:</span>
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> openjdk<span class="token punctuation">:</span><span class="token number">8</span>
+    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> application<span class="token punctuation">-</span>docker
+    <span class="token key atrule">depends_on</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> mongodb
+    <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> /opt/docker/application<span class="token punctuation">:</span>/opt/application
+    <span class="token key atrule">command</span><span class="token punctuation">:</span> java <span class="token punctuation">-</span>jar /opt/application/docker<span class="token punctuation">-</span>example<span class="token punctuation">-</span>1.0<span class="token punctuation">-</span>SNAPSHOT.jar
+    <span class="token key atrule">networks</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> docker<span class="token punctuation">-</span>example</code></pre>
+<ul>
+<li>Field <code>image</code>: use <a href="https://hub.docker.com/_/openjdk/" target="_blank" rel="noopener">open jdk image</a> on docker hub</li>
+<li>Field <code>container_name</code>: set the container name</li>
+<li>Field <code>depends_on</code>: this container depends on <code>mongodb</code> containers, it will start after <code>mongodb</code></li>
+<li>Field <code>volumes</code>: synchronize folder <code>/opt/application</code> in the container with folder <code>/opt/docker/application</code> in the<br>computer. We will copy jar file to this location.</li>
+<li>Field <code>command</code>: run this command when container start (Start java application).</li>
+</ul>
+<h3 id="Java-application"><a href="#Java-application" class="headerlink" title="Java application"></a>Java application</h3><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Application</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> String DB_HOST <span class="token operator">=</span> <span class="token string">"mongo-docker"</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> DB_PORT <span class="token operator">=</span> <span class="token number">27017</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> String DB_USER <span class="token operator">=</span> <span class="token string">"halab"</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> String DB_PASSWORD <span class="token operator">=</span> <span class="token string">"superman"</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> String DB_AUTHENTICATION_DB <span class="token operator">=</span> <span class="token string">"admin"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> MongoClient <span class="token function">connectDatabase</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        MongoCredential credential <span class="token operator">=</span> MongoCredential<span class="token punctuation">.</span><span class="token function">createCredential</span><span class="token punctuation">(</span>DB_USER<span class="token punctuation">,</span> DB_AUTHENTICATION_DB<span class="token punctuation">,</span> 
+                DB_PASSWORD<span class="token punctuation">.</span><span class="token function">toCharArray</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        MongoClientOptions option <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MongoClientOptions<span class="token punctuation">.</span>Builder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">MongoClient</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ServerAddress</span><span class="token punctuation">(</span>DB_HOST<span class="token punctuation">,</span> DB_PORT<span class="token punctuation">)</span><span class="token punctuation">,</span> credential<span class="token punctuation">,</span> option<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span></code></pre>
+<p>The java application must connect mongo db with username, password set in mongodb service. The <code>DB_HOST</code> must be<br><code>mongo-docker</code> - the name of mongo db container</p>
 
             </div>
             <hr/>
@@ -585,7 +584,7 @@ ENTRYPOINT ["java","-jar","spring-prometheus-grafana-0.0.1-SNAPSHOT.jar"]</code>
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://server-down.github.io" rel="external nofollow noreferrer">halab</a>
+                    <a href="https://server-down.github.io" rel="external nofollow noreferrer">apollo</a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -595,7 +594,7 @@ ENTRYPOINT ["java","-jar","spring-prometheus-grafana-0.0.1-SNAPSHOT.jar"]</code>
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://server-down.github.io/2019/12/14/monitoring-spring-boot-application-with-prometheus-and-grafana/">https://server-down.github.io/2019/12/14/monitoring-spring-boot-application-with-prometheus-and-grafana/</a>
+                    <a href="https://server-down.github.io/2019/12/14/docker-example/">https://server-down.github.io/2019/12/14/docker-example/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -608,7 +607,7 @@ ENTRYPOINT ["java","-jar","spring-prometheus-grafana-0.0.1-SNAPSHOT.jar"]</code>
                     All articles in this blog are used except for special statements
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
                     reprint polocy. If reproduced, please indicate source
-                    <a href="https://server-down.github.io" target="_blank">halab</a>
+                    <a href="https://server-down.github.io" target="_blank">apollo</a>
                     !
                 </span>
             </div>
@@ -633,20 +632,12 @@ ENTRYPOINT ["java","-jar","spring-prometheus-grafana-0.0.1-SNAPSHOT.jar"]</code>
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/monitoring/">
-                                    <span class="chip bg-color">monitoring</span>
+                                <a href="/tags/docker/">
+                                    <span class="chip bg-color">docker</span>
                                 </a>
                             
-                                <a href="/tags/spring-boot/">
-                                    <span class="chip bg-color">spring boot</span>
-                                </a>
-                            
-                                <a href="/tags/prometheus/">
-                                    <span class="chip bg-color">prometheus</span>
-                                </a>
-                            
-                                <a href="/tags/grafana/">
-                                    <span class="chip bg-color">grafana</span>
+                                <a href="/tags/docker-compose/">
+                                    <span class="chip bg-color">docker-compose</span>
                                 </a>
                             
                         </div>
@@ -812,9 +803,10 @@ ENTRYPOINT ["java","-jar","spring-prometheus-grafana-0.0.1-SNAPSHOT.jar"]</code>
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
             <div class="card">
                 <a href="/2019/12/14/docker-example/">
                     <div class="card-image">
@@ -835,9 +827,9 @@ A java application th
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-12-14
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-12-14
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -846,6 +838,7 @@ A java application th
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -865,7 +858,7 @@ A java application th
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                Current&nbsp;<i class="far fa-dot-circle"></i>
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="/2019/12/14/monitoring-spring-boot-application-with-prometheus-and-grafana/">
@@ -903,7 +896,6 @@ Spring boot applicationDependenciesIn pom.xml file, add these 2 dependencies:
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
