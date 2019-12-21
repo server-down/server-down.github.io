@@ -13,6 +13,11 @@ permalink: /:title/
 
 # Authors
 authors:
+  halab:
+    name: Beo
+    display_name: "Bụng Béo"
+    avatar: "assets/images/avatar/halab.jpg"
+#    description: "Ngồi nhiều nên béo."
   sal:
     name: Sal
     display_name: Sal
