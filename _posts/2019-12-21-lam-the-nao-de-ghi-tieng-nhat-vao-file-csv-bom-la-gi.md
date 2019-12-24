@@ -5,7 +5,7 @@ author: halab
 categories: [ Tutorial, Coding ]
 tags: [BOM, csv, Byte Order Mark]
 image: assets/images/bom.png
-featured: true
+featured: false
 ---
 Vừa rồi, mình đã gặp phải vấn đề tưởng như rất đơn giản ở trên, file CSV xuất ra khi mở bằng Excel thì không hiển thị text Nhật, thay vào đó là mấy ký tự kiểu “¿þÿ” 😳.
 
