@@ -5,7 +5,7 @@ author: halab
 categories: [Monitoring ]
 tags: [Sentry, Exception]
 image: assets/images/sentry-logo-black.png
-featured: true
+featured: false
 ---
 Trong quá trình vận hành hệ thống, không thể tránh khỏi các bug phát sinh. 
 Bản thân team của mình cũng thường xuyên nhận được những feedback về các lỗi xảy ra từ phía khách hàng, từ end users. 

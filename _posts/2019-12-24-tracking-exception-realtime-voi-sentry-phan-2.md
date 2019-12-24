@@ -3,9 +3,9 @@ layout: post
 title:  "Tracking error real time với Sentry <br>Phần 2 — Install Sentry với Docker"
 author: halab
 categories: [Monitoring, Tutorial]
-tags: [Sentry, Exception]
+tags: [Sentry, Docker]
 image: assets/images/sentry-docker.jpeg
-featured: true
+featured: false
 ---
 Tại sao phải tự cài Sentry ý hả? Vì mặc dù Sentry.io có cung cấp dịch vụ cloud nhưng gói free chỉ có 5k event 1 tháng. 
 Và với cái dự án mà không có nhiều ngân sách + code lởm khởm bắn exception như lá rụng mùa thu này 
