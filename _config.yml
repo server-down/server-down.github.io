@@ -18,6 +18,7 @@ authors:
     display_name: "Bụng Béo"
     avatar: "assets/images/avatar/halab.jpg"
 #    description: "Ngồi nhiều nên béo."
+    web: https://github.com/halab4dev
   sal:
     name: Sal
     display_name: Sal
