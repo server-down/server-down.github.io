@@ -5,7 +5,7 @@ author: halab
 categories: [Monitoring, Tutorial]
 tags: [Sentry, Spring Boot, Exception]
 image: assets/images/spring-sentry.png
-featured: true
+featured: false
 ---
 Sau khi cài đặt Sentry thành công thì giờ là lúc tích hợp vào project của mình rồi.
 ## Tạo project trên Sentry
