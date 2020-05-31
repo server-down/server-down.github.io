@@ -5,7 +5,7 @@ author: halab
 categories: [ Tutorial ]
 tags: [Kibana, Elasticsearch, X-Pack]
 image: https://static-www.elastic.co/v3/assets/bltefdd0b53724fa2ce/blta053a53f023ccc57/5bbedb3a6c9763b95d07abdc/blog-x-pack-thumb.jpg
-featured: true
+featured: false
 ---
 
 Đợt vừa rồi mình vừa mới phải cài lại Elasticsearch với Kibana cho hệ thống monitoring 
