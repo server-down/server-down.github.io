@@ -19,6 +19,12 @@ authors:
     avatar: "assets/images/avatar/halab.jpg"
 #    description: "Ngồi nhiều nên béo."
     web: /authors/halab
+  angel:
+    name: Angel
+    display_name: "Angel"
+    avatar: "assets/images/avatar/angel.jpg"
+    #    description: "Ngồi nhiều nên béo."
+    web: /authors/angel
 
 # Plugins
 plugins:
