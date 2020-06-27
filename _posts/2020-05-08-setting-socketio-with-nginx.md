@@ -5,7 +5,7 @@ author: halab
 categories: [ Tutorial ]
 tags: [Nginx, SocketIO]
 image: "https://seeklogo.com/images/N/nginx-logo-FF65602A76-seeklogo.com.png"
-featured: true
+featured: false
 ---
 
 Project mới lại đến đoạn deploy lên production rồi.
