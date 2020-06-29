@@ -108,8 +108,33 @@ Và quả thật, it works like a charm! 😍. Fragment ratio từ đó rất �
 
 Ngoài ra thằng này cũng là nguyên nhân gây chậm khi redis tiến hành backup dataset vào hard disk, thế cho nên thằng này phải tắt ngay khi nghĩ đến dùng Redis
 
+### Slow Log
+Nếu muốn monitor log bị chậm của redis thì sử dụng [slowlog](https://redis.io/commands/slowlog) command.
+Configure slow log với 2 parameter: `slowlog-log-slower-than` - set thời gian xử lí tối thiểu của query sẽ được lưu, và `slowlog-max-len` - số lượng slow log tối đa. Ví dụ như sau: 
+```shell
+CONFIG GET slowlog-log-slower-than
+CONFIG SET slowlog-log-slower-than 10000
+CONFIG GET slowlog-max-len
+CONFIG SET slowlog-max-len 256
+```
+Đọc slow log với câu lệnh `SLOWLOG GET`. Mặc định thì câu lệnh này sẽ trả về toàn bộ slow log, nếu muốn giới hạn số lượng trả về, ví dụ là 2 giá trị thì sử dụng `SLOWLOG GET 2`. Sample output như sau:
+```shell
+redis 127.0.0.1:6379> SLOWLOG GET 2
+1) 1) (integer) 14
+   2) (integer) 1309448221
+   3) (integer) 15
+   4) 1) "ping"
+2) 1) (integer) 13
+   2) (integer) 1309448128
+   3) (integer) 30
+   4) 1) "slowlog"
+      2) "get"
+      3) "100"
+```
+
+
 ### Latency Monitoring
-Redis có cung cấp sẵn công cụ để [monitoring latency](https://redis.io/topics/latency-monitor), để enable tính năng này, run command:
+Để monitoring một cách chi tiết thì redis có cung cấp sẵn công cụ [monitoring latency](https://redis.io/topics/latency-monitor), với các metrics được monitor đa dạng. Để enable tính năng này, run command:
 ```shell
 CONFIG SET latency-monitor-threshold 100
 ``` 
