@@ -29,7 +29,12 @@ Rồi, giờ thì mình sẽ enable X-Pack lên nhé.
 
 - Sau khi cài đặt xong Elasticsearch và Kibana, vào file `/etc/elasticsearch/elasticsearch.yml`, thêm dòng config này vào
 ```yml
-xpack.security.enable: true
+xpack.security.enabled: true
+```
+
+- Restart Elasticsearch
+```shell
+$ service elasticsearch restart
 ```
 
 - Tiếp theo thì set password cho 2 user elastic và kibana. Mặc định Elastic đã có sẵn 1 số 
@@ -49,9 +54,8 @@ elasticsearch.username: "kibana"
 elasticsearch.password: "<KIBANA_USER_PASSWORD>"
 ```
 
-- Restart Elasticsearch và Kibana
+- Restart Kibana
 ```shell
-$ service elasticsearch restart
 $ service kibana restart
 ```
 

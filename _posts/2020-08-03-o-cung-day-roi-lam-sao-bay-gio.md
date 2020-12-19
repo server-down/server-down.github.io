@@ -5,7 +5,7 @@ author: halab
 categories: [ Monitoring ]
 tags: [Monitoring, Disk Space]
 image: "https://www.servercake.blog/wp-content/uploads/2017/11/df-and-du-command.png"
-featured: true
+featured: false
 ---
 - Có alert full disk kìa em, check đi!
 - Để em xem nào. `df -h`
