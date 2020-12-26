@@ -96,15 +96,18 @@ Thêm các thông tin khác nữa:
 Để có thể public lên Central Repository thì các file cần phản được "sign" bằng PGP (không biết dịch từ sign thế nào nữa).
 - Cài đặt PGP qua package manager hoặc download từ [trang chủ](https://www.gnupg.org/download/)
 - Tạo key mới (chọn RSA và 2048bit, các cái khác thì tuỳ)
+
 ```shell
 $ gpg2 --gen-key
 ```
 Note: cái đoạn tạo key này chả hiểu chạy kiểu gì, nhưng nếu thấy lâu thì có thể chạy lệnh sau ở 1 cửa sổ terminal khác nhé
+
 ```shell
 $ sudo find / -type f | xargs grep somerandomstring > /dev/null
 ```
 
 - List key
+
 ```shell
 gpg2 --list-keys
 
@@ -116,6 +119,7 @@ sub   2048g/D704745C 2010-01-13
 ```
 
 - Distribute public key lên các keys server
+
 ```shell
 gpg2 --keyserver hkp://pool.sks-keyservers.net --send-keys C6EED57A
 ```
