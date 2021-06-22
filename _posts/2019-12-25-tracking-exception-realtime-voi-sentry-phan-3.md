@@ -7,6 +7,10 @@ tags: [Sentry, Spring Boot, Exception]
 image: assets/images/spring-sentry.png
 featured: false
 ---
+
+Updated: 22/6/2021
+---
+
 Sau khi cài đặt Sentry thành công thì giờ là lúc tích hợp vào project của mình rồi.
 ## Tạo project trên Sentry
 - Vào mục `Project` từ left menu. Chọn `Create Project`
@@ -28,13 +32,13 @@ Sau khi cài đặt Sentry thành công thì giờ là lúc tích hợp vào pro
     ...
     <dependency>
         <groupId>io.sentry</groupId>
-        <artifactId>sentry-spring</artifactId>
-        <version>1.7.27</version>
+        <artifactId>sentry-spring-boot-starter</artifactId>
+        <version>5.0.1</version>
     </dependency>
     <dependency>
         <groupId>io.sentry</groupId>
         <artifactId>sentry-logback</artifactId>
-        <version>1.7.27</version>
+        <version>5.0.1</version>
     </dependency>
     ...
 </dependencies>
@@ -42,91 +46,49 @@ Sau khi cài đặt Sentry thành công thì giờ là lúc tích hợp vào pro
 
 ## Configuration
 ### Config sentry option
-Tạo file `sentry.properties` trong thư mục `src/resource` với nội dung sau:
-```properties
-release=1.0.0
-tags=service:gateway
-stacktrace.app.packages=com.github.halab4dev
-
-
-async.queuesize=100
-timeout=1000
+Trong file `application.yml` trong thư mục `src/resource` thêm các nội dung sau:
+```yml
+sentry:
+  dsn: <DSN_URL>
+  environment: <ENVIRONMENT>
+  tags:
+    <some tag name>: <tag value>
 ```
-Danh sách đầy đủ các option có thể xem tại [đây](https://docs.sentry.io/error-reporting/configuration/?platform=javascript#common-options)
+Danh sách đầy đủ các option có thể xem tại [đây](https://docs.sentry.io/platforms/java/guides/spring-boot/configuration/)
 
 ### Config Spring beans
-Tạo class `SentryConfiguration` với các nội dung sau:
-
-Khởi tạo Sentry, thiếu dòng này đương nhiên là Sentry sẽ không hoạt động rồi 😀.
-`DSN_URL` thì lấy ở phía trên kia nhé.
+Tạo class `SentryConfiguration` và thêm đoạn code sau để có thể gắn kèm các thông tin của user khi catch exception:
 ```java
-@PostConstruct
-    public void init() {
-        Sentry.init("<DSN_URL>?environment=staging");
-    }
-```
-Param `environment` cũng là 1 option của Sentry, 
-cái này đi theo môi trường nên cả cái đoạn `<DSN_URL>?environment=staging` nên config linh động theo môi trường,
-dùng biến môi trường hay đọc từ file chẳng hạn
+import org.springframework.stereotype.Component;
+import io.sentry.core.protocol.User;
+import io.sentry.spring.SentryUserProvider;
 
-Tiếp theo, để bắt các exception được throw ra từ controller, ta cần khai báo 1 `HandlerExceptionResolver`:
-```java
-    @Bean
-    public HandlerExceptionResolver sentryExceptionResolver() {
-        return new io.sentry.spring.SentryExceptionResolver();
-    }
-```
-
-Ngoài ra, để Sentry có thể lấy được các thông tin từ HTTP request (ví dụ như User Agent), thì khai báo thêm bean này nữa nhé:
-```java
-    @Bean
-    public ServletContextInitializer sentryServletContextInitializer() {
-        return new io.sentry.spring.SentryServletContextInitializer();
-    }
-```
-
-Túm cái váy lại, file `SentryConfiguration` trông sẽ như thế này:
-```java
-@Configuration
-public class SentryConfiguration {
-
-    @PostConstruct
-    public void init() {
-        Sentry.init("<DSN_URL>?environment=staging");
-    }
-
-    @Bean
-    public HandlerExceptionResolver sentryExceptionResolver() {
-        return new io.sentry.spring.SentryExceptionResolver();
-    }
-
-    @Bean
-    public ServletContextInitializer sentryServletContextInitializer() {
-        return new io.sentry.spring.SentryServletContextInitializer();
-    }
+@Component
+class CustomSentryUserProvider implements SentryUserProvider {
+  public User provideUser() {
+    User user = User();
+    // ... set user information
+    return user;
+  }
 }
 ```
+
 ### Integrating with logback
 Cần lưu ý là sau khi các bean ở trên thì chỉ có thể bắt được các Exception được throw ra phía ngoài cùng thôi nhé.
 Nếu có exception nào đã catch lại rồi thì chịu. Để xử lý vấn đề này thì cần phải custom lại logback mặc định của spring boot.
 Tạo file `logback-spring.xml` cụng tại thư mục `src/resource`:
 ```xml
+<?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <!--    Include spring boot default config-->
-    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+  <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+  <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
 
-    <!--    Configure the Sentry appender, overriding the logging threshold to the WARN level -->
-    <appender name="Sentry" class="io.sentry.logback.SentryAppender">
-        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>ERROR</level>
-        </filter>
-    </appender>
+  <appender name="SENTRY" class="io.sentry.logback.SentryAppender" />
 
-    <!--    Enable the Console and Sentry appenders, Console is provided as an example
-        of a non-Sentry logger that is set to a different logging threshold -->
-    <root level="INFO">
-        <appender-ref ref="Sentry" />
-    </root>
+  <root level="info">
+    <appender-ref ref="CONSOLE" />
+    <appender-ref ref="SENTRY" />
+  </root>
 </configuration>
 ```
 Ý nghĩa cái config trên cũng đơn giản thôi. Mỗi khi sử dụng hàm `log.error()` thì exception cũng được tự động gửi lên Sentry nữa.

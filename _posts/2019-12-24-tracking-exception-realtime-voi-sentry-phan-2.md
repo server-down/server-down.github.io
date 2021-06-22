@@ -7,21 +7,27 @@ tags: [Sentry, Docker]
 image: assets/images/sentry-docker.jpeg
 featured: false
 ---
+
+Updated: 22/6/2021
+---
+
 Tại sao phải tự cài Sentry ý hả? Vì mặc dù Sentry.io có cung cấp dịch vụ cloud nhưng gói free chỉ có 5k event 1 tháng. 
 Và với cái dự án mà không có nhiều ngân sách + code lởm khởm bắn exception như lá rụng mùa thu này 
 thì chỉ có cách là tự cài Sentry mà dùng thôi 😭.
 
 ## Requirements
 
-- Docker 17.05.0+
-- Compose 1.17.0+
-- At least 3GB RAM
+- Docker 19.03.6+
+- Compose 1.24.1+
+- 4 CPU Cores
+- 8 GB RAM
+- 20 GB Free Disk Space
 
 ## Install
 
-Đầu tiên là clone cái repo này về: `https://github.com/getsentry/onpremise/tree/stable`. Dùng bản stable nhé (ở thời điểm viết bài này là 9.1.2), cho đỡ đau khổ 😏. Trong này mình sẽ cần chú ý 2 file thôi:
+Đầu tiên là clone cái repo này về: `https://github.com/getsentry/onpremise` (ở thời điểm viết bài này là 21.5.1). Trong này mình sẽ cần chú ý 2 file thôi:
 
-- `config.yml`: dùng để config mail, slack.
+- `sentry/config.yml`: dùng để config mail, slack.
 - `install.sh`: dùng để cài đặt sentry
 
 ### Config mail
@@ -55,7 +61,7 @@ Sau bước này thì chúng ta đã có thể truy cập Sentry ở địa ch�
 
 ## Create member account
 
-Để invite member vào sentry, vào `Setting` > `Members` > `Invite Members`. Điển mail, role và team rồi bấm send là được
+Để invite member vào sentry, vào `Setting` > `Team` > `Add Member` > `Invite Members`. Điển mail, role và team rồi bấm send là được
 
 Vậy nếu đã config mail ở trên và làm theo các thao tác ở trên mà member trong team vẫn không nhận được mail thì sao?
 Nghe vô lý nhưng mình đã bị như vậy thật đấy 🤣. Sau 1 hồi (khá lâu) ngồi mò thì phát hiện ra sentry có support tạo account qua cli.
